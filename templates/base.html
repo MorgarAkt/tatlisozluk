@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        {% block css_files %}{% endblock css_files %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+        <title>{% block title %} {% endblock %}</title>
+        {% block links %}{% endblock links %}
+    </head>
+
+    <body>
+
+        {% include "partials/_navbar.html" %}
+
+        <main>
+        {% block content %} {% endblock content %}
+        </main> 
+
+        {% block js_files %}{% endblock js_files %}
+        <script src="{% static '/js/bootstrap.js' %}"></script>
+    </body>
+</html>
