@@ -12,7 +12,7 @@ class Title(models.Model):
     likes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title_text
+        return self.title_name
     
 
 class Entry(models.Model):

@@ -44,8 +44,14 @@ body{
     transform-origin: 100% 50%;
 }
 
+main {
+    position: absolute;
+    top: 140px;
+}
+
 @media (max-width: 630px) {
     .nav-box{
         font-size: 14px;
     }
 }
+

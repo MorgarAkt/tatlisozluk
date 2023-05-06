@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
+
+{% for title in titles %}
+<!-- show first entry for each title -->
+{% for entry in entries %}
+
+
+
+{% if entry.title == title %}
+<div class="title">
+    <p class="title-name">{{ title.title_name }}</p>
+    <p class="title-message">{{ entry.entry_text }}</p>
+    <div class="title-footer">
+        <div class="like">
+            <button>▲</button>
+            <button>▼</button>
+            <p class="count">{{ entry.likes }}</p>
+        </div>
+        <div class="author">
+            <div class="date-author">
+                <p class="author">{{ entry.author.username }}</p>
+                <p class="date">{{ entry.created_date }}</p>
+            </div>
+            <img class="profile-image" src="{% static 'images/default.jpg' %}" alt="">
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}

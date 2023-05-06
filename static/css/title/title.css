@@ -1,0 +1,80 @@
+.title {
+    background-color: var(--brown);
+    color: #ffffff;
+    padding: 10px;
+    justify-content: space-between;
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    overflow: auto;
+    border-radius: 7px;
+}
+
+.title-message {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.title-footer {
+    display: flex;
+    align-items: center;
+}
+
+.title-footer > * {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100vw;
+}
+
+.profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.date {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #ffffff;
+    opacity: 0.75;
+}
+
+.title-name {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.date-author {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.date-author > * {
+    margin: 3px;
+}
+
+.like {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 14px;
+}
+
+.like button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.author {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
