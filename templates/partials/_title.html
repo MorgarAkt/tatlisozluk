@@ -1,10 +1,12 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
 
-{% for object in titles_list %}
+{% for object in entries_profiles %}
 
 <div class="title">
-    <p class="title-name">{{ object.title.title_name }}</p>
+    {% if forloop.first %}
+    <p class="title-name">{{ title.title_name }}</p>
+    {% endif %}
     <p class="title-message">{{ object.entry.entry_text }}</p>
     <div class="title-footer">
         <div class="like">
@@ -23,3 +25,4 @@
 </div>
 
 {% endfor %}
+
