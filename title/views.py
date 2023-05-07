@@ -26,3 +26,16 @@ def title(request, title_id):
         entries_profiles_list.append({'entry':entry, 'profile':profile})
     print(entries_profiles_list)
     return render(request, "title/title.html", {'title':title, 'entries_profiles':entries_profiles_list})
+
+
+def like_or_dislike(request, title_id, entry_id, like_or_dislike):
+    if request.method != "PUT":
+        return title(request, title_id)
+    
+    entry = Entry.objects.get(id=entry_id)
+    if like_or_dislike == "like":
+        entry.likes += 1
+    else:
+        entry.likes -= 1
+    entry.save()
+    return title(request, title_id)
