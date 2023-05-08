@@ -10,7 +10,6 @@ class Title(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
 
 
     def save(self, *args, **kwargs):
@@ -29,6 +28,8 @@ class Entry(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     likes = models.IntegerField(default=0)
+    likers = models.ManyToManyField(User, related_name="likers", blank=True)
+    dislikers = models.ManyToManyField(User, related_name="dislikers", blank=True)
 
     def __str__(self):
         return self.author.username + "- " + self.title.title_name

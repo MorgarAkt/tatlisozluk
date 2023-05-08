@@ -6,8 +6,6 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 
-# Create your views here.
-
 def home(request):
     titles = Title.objects.all()
     titles_list = []
@@ -35,22 +33,32 @@ def title(request, slug):
         entries_profiles_list.append({'entry':entry, 'profile':profile})
     return render(request, "title/title.html", {'title':title, 'entries_profiles':entries_profiles_list})
 
+
 @login_required
 def like(request, title_id, entry_id):
     if request.method != "PUT":
         return title(request, title_id)
     entry = Entry.objects.get(id=entry_id)
     title = Title.objects.get(id=title_id)
+    if request.user in entry.likers.all():
+        return title(request, title.slug, title_id)
+    
+    entry.likers.add(request.user)
     entry.likes += 1
     entry.save()
     return title(request, title.slug, title_id)
 
 
+@login_required
 def dislike(request, title_id, entry_id):
     if request.method != "PUT":
         return title(request, title_id)
     entry = Entry.objects.get(id=entry_id)
     title = Title.objects.get(id=title_id)
+
+    if request.user not in entry.likers.all():
+        return title(request, title.slug, title_id)
+    
     entry.likes -= 1
     entry.save()
     return title(request, title.slug, title_id)
