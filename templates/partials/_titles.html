@@ -1,15 +1,18 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
+{% csrf_token %}
 
 {% for object in titles_list %}
 
 <div class="title">
-    <p class="title-name">{{ object.title.title_name }}</p>
+    <a class="no-underline" href="{% url 'title' slug=object.title.slug %}?titleId={{ object.title.id }}">
+        <p class="title-name">{{ object.title.title_name }}</p>
+    </a>
     <p class="title-message">{{ object.entry.entry_text }}</p>
     <div class="title-footer">
         <div class="like">
-            <button>▲</button>
-            <button>▼</button>
+            <button class="likeBtn" data-title-id="{{ object.title.id }}" data-entry-id="{{ object.entry.id }}">▲</button>
+            <button class="dislikeBtn" data-title-id="{{ object.title.id }}" data-entry-id="{{ object.entry.id }}">▼</button>
             <p class="count">{{ object.entry.likes }}</p>
         </div>
         <div class="author">
@@ -23,3 +26,4 @@
 </div>
 
 {% endfor %}
+<script src="{% static 'js/handleLike.js' %}"></script>

@@ -4,40 +4,32 @@ const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 
 for (let i = 0; i < likeBtns.length; i++) {
-    likeBtns[i].addEventListener('click', () => {
+    likeBtns[i].addEventListener('click', async () => {
         const entryId = likeBtns[i].getAttribute('data-entry-id');
         const titleId = likeBtns[i].getAttribute('data-title-id');
-        fetch(`/title/${titleId}/${entryId}/like`, {
+        await fetch(`/title/${titleId}/${entryId}/like`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken
-              },
-        }).then(res => res.json())
-            .then(data => {
-                console.log(data);
-                location.reload();
-            }).catch(err => console.log(err));
-    }
-    );
+            },
+        });
+        window.location.reload();
+    });
 }
 
 for (let i = 0; i < dislikeBtns.length; i++) {
-    dislikeBtns[i].addEventListener('click', () => {
+    dislikeBtns[i].addEventListener('click', async () => {
         const entryId = dislikeBtns[i].getAttribute('data-entry-id');
         const titleId = dislikeBtns[i].getAttribute('data-title-id');
-        fetch(`/title/${titleId}/${entryId}/dislike`, {
+        await fetch(`/title/${titleId}/${entryId}/dislike`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken
-              },
-        }).then(res => res.json())
-            .then(data => {
-                console.log(data);
-                location.reload();
-            }).catch(err => console.log(err));
-    }
-    );
+            },
+        });
+        window.location.reload();
+    });
 }
 

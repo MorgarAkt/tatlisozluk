@@ -78,3 +78,8 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+.no-underline {
+    text-decoration: none;
+    color: #ffffff;
+}
