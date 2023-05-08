@@ -1,0 +1,19 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
+
+<div class="create-new-title">
+    <form id="create-form" action="{% url 'saveTitle' %}" method="POST">
+        {% csrf_token %}
+        <div class="title-properties">
+            <input type="text" class="create-title-name" name="title_name" placeholder="Başlık Adı" value="{{ slug }}">
+            <textarea class="create-entry-text" name="entry_text" placeholder="Entry yazısı"></textarea>
+            <div class="create">
+                <input class="create-button" type="submit" value="Oluştur">
+            </div>
+        </div>
+    </form>
+    <p class="entry-text-counter-text"><span class="entry-text-counter">500</span> karakteriniz kaldı.</p>
+</div>
+
+<script src="{% static 'js/handleEntryText.js' %}"></script>

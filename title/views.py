@@ -3,7 +3,6 @@ from .models import Title, Entry
 from account.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from django.urls import reverse
 
 
 def home(request):
@@ -17,8 +16,34 @@ def home(request):
     return render(request, "title/index.html", {'titles_list':titles_list})
 
 
+def createNewTitle(request, slug=None):
+    if slug:
+        slug = slug.split('-')
+        slug = ' '.join(slug)
+    if slug == "createTitle":
+        slug = ""
+    return render(request, "title/createTitle.html", {'slug':slug})
+
+
+@login_required
+def saveTitle(request):
+    if request.method != "POST":
+        return redirect("home")
+    
+    title_name = request.POST.get("title_name")
+    entry_text = request.POST.get("entry_text")
+    title = Title(title_name=title_name, author=request.user)
+    title.save()
+    entry = Entry(title=title, entry_text=entry_text, author=request.user)
+    entry.save()
+    return redirect(f"/{title.slug}?titleId={title.id}")
+
+
 def title(request, slug):
     title_id = request.GET.get('titleId')
+    if title_id is None:
+        return createNewTitle(request, slug)
+
     title = Title.objects.get(id=title_id)
     print(title)
     if slug != title.slug:

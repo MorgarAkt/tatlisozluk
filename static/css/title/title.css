@@ -12,6 +12,24 @@
     border-radius: 7px;
 }
 
+.create-title {
+    background-color: var(--brown);
+    color: #ffffff;
+    padding: 10px;
+    justify-content: space-between;
+    width: 60vw;
+    height: 7vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    overflow: hidden;
+    border-radius: 7px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
 .title-message {
     display: flex;
     align-items: center;
@@ -23,7 +41,7 @@
     align-items: center;
 }
 
-.title-footer > * {
+.title-footer>* {
     margin-left: 10px;
     margin-right: 10px;
     width: 100vw;
@@ -56,7 +74,7 @@
     margin: 10px;
 }
 
-.date-author > * {
+.date-author>* {
     margin: 3px;
 }
 
@@ -82,4 +100,87 @@
 .no-underline {
     text-decoration: none;
     color: #ffffff;
+}
+
+.create-new-title {
+    background-color: #C3B091;
+    color: #ffffff;
+    padding: 10px;
+    justify-content: space-between;
+    width: 60vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    border-radius: 7px;
+    transform: translateY(30%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+.create-title-name {
+    width: 50vw;
+    height: 5vh;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.create-entry-text {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    height: 35vh;
+    border-radius: 7px;
+    max-height: 35vh;
+    resize: none;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.title-properties {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-properties>* {
+    margin-bottom: 20px;
+}
+
+form .create {
+    height: 45px;
+    margin: 35px 0;
+}
+
+
+.create input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: hsl(27, 16%, 46%);
+}
+.create input:hover {
+    background-color: var(--brown);
 }

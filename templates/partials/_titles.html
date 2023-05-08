@@ -2,6 +2,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
 {% csrf_token %}
 
+<div class="create-title">
+    <a class="no-underline" href="/createTitle">Yeni bir entry oluştur!</a>
+</div>
+
+
 {% for object in titles_list %}
 
 <div class="title">
