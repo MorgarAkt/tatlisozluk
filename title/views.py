@@ -3,6 +3,13 @@ from .models import Title, Entry
 from account.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+
+
+
+
+
+
 
 
 def home(request):
@@ -63,15 +70,23 @@ def title(request, slug):
 def like(request, title_id, entry_id):
     if request.method != "PUT":
         return title(request, title_id)
+    
     entry = Entry.objects.get(id=entry_id)
     title = Title.objects.get(id=title_id)
+
     if request.user in entry.likers.all():
-        return title(request, title.slug, title_id)
+        entry.likers.remove(request.user)
+        entry.likes -= 1
+    elif request.user in entry.dislikers.all():
+        entry.dislikers.remove(request.user)
+        entry.likers.add(request.user)
+        entry.likes += 2
+    else:
+        entry.likers.add(request.user)
+        entry.likes += 1
     
-    entry.likers.add(request.user)
-    entry.likes += 1
     entry.save()
-    return title(request, title.slug, title_id)
+    return redirect(f"/{title.slug}?titleId={title.id}")
 
 
 @login_required
@@ -81,9 +96,27 @@ def dislike(request, title_id, entry_id):
     entry = Entry.objects.get(id=entry_id)
     title = Title.objects.get(id=title_id)
 
-    if request.user not in entry.likers.all():
-        return title(request, title.slug, title_id)
+    if request.user in entry.dislikers.all():
+        entry.dislikers.remove(request.user)
+        entry.likes += 1
+    elif request.user in entry.likers.all():
+        entry.dislikers.add(request.user)
+        entry.likers.remove(request.user)
+        entry.likes -= 2
+    else:
+        entry.dislikers.add(request.user)
+        entry.likes -= 1
     
-    entry.likes -= 1
     entry.save()
     return title(request, title.slug, title_id)
+
+
+@login_required
+def createEntry(request, title_id):
+    if request.method != "POST":
+        return redirect("home")
+    title = Title.objects.get(id=title_id)
+    entry_text = request.POST.get("entry_text")
+    entry = Entry(title=title, entry_text=entry_text, author=request.user)
+    entry.save()
+    return redirect(f"/{title.slug}?titleId={title.id}")

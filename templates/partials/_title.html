@@ -28,7 +28,21 @@
 
 {% endfor %}
 
+<div class="create-new-entry">
+    <form id="create-form" action="{% url 'createEntry' title_id=title.id %}" method="POST">
+        {% csrf_token %}
+        <div class="title-properties">
+            <textarea class="create-entry-text" name="entry_text" placeholder="Entry yazısı"></textarea>
+            <div class="create">
+                <input class="create-button" type="submit" value="Gönder">
+            </div>
+        </div>
+    </form>
+    <p class="entry-text-counter-text"><span class="entry-text-counter">500</span> karakteriniz kaldı.</p>
+</div>
+
 
 <script src="{% static 'js/handleLike.js' %}"></script>
+<script src="{% static 'js/handleEntryText.js' %}"></script>
 
 

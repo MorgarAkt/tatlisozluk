@@ -1,5 +1,4 @@
 const entryText = document.getElementsByClassName('create-entry-text')[0];
-const titleName = document.getElementsByClassName('create-title-name')[0];
 const maxEntryTextLength = 500;
 const entryTextCounterText = document.getElementsByClassName('entry-text-counter-text')[0];
 const entryTextCounter = document.getElementsByClassName('entry-text-counter')[0];

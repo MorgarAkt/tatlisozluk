@@ -102,6 +102,23 @@
     color: #ffffff;
 }
 
+.create-new-entry {
+    background-color: var(--brown);
+    color: #ffffff;
+    padding: 10px;
+    justify-content: space-between;
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    overflow: auto;
+    border-radius: 7px;
+}
+.create-new-entry .create input:hover {
+    background-color: #5C4033;
+}   
+
 .create-new-title {
     background-color: #C3B091;
     color: #ffffff;

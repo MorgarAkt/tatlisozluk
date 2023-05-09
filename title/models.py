@@ -33,5 +33,3 @@ class Entry(models.Model):
     def __str__(self):
         return self.author.username + "- " + self.title.title_name
     
-
-    
