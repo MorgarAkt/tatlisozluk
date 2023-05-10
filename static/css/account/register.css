@@ -14,8 +14,8 @@ body {
 }
 .container {
     position: relative;
-    top: 30vh;
-    max-width: 700px;
+    top: 20vh;
+    max-width: 800px;
     width: 100%;
     background-color: #fff;
     padding: 25px 30px;
@@ -130,7 +130,8 @@ form .input-box #FullName {
 
 @media (max-width: 584px) {
     .container {
-        max-width: 100%;
+        top: 12vh;
+        max-width: 95%;
     }
     form .user-details .input-box {
         margin-bottom: 15px;
@@ -150,6 +151,5 @@ form .input-box #FullName {
 @media (max-width: 600px) {
     .container .content .category {
         flex-direction: column;
-        top: 20vh;
     }
 }

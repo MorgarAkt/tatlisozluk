@@ -6,19 +6,18 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 
 
-
-
-
-
-
-
 def home(request):
     titles = Title.objects.all()
     titles_list = []
     for title in titles:
         entry = Entry.objects.filter(title=title).order_by('-likes')[0]
         user = entry.author
-        profile = Profile.objects.get(user=user)
+        try:
+            profile = Profile.objects.get(user=user)
+        except:
+            profile = None
+
+
         titles_list.append({'title':title, 'entry':entry, 'profile':profile})
     return render(request, "title/index.html", {'titles_list':titles_list})
 
