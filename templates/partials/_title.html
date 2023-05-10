@@ -1,15 +1,42 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% csrf_token %}
 
 {% for object in entries_profiles %}
 
 <div class="title">
     {% if forloop.first %}
-    <p class="title-name">{{ title.title_name }}</p>
+        <p class="title-name">{{ title.title_name }}</p>
     {% endif %}
-    <p class="title-message">{{ object.entry.entry_text }}</p>
+    {% if change_entry_id and object.entry.id == change_entry_id %}
+    <!--  -->
+    <div class="create-new-entry">
+        <form id="edit-form" action="{% url 'editEntry' entry_id=object.entry.id %}" method="POST">
+            {% csrf_token %}
+            <div class="title-properties">
+                <textarea class="edit-entry" name="edit-entry-text" placeholder="Entry yazısı"></textarea>
+                <div class="create">
+                    <input class="create-button" type="submit" value="Gönder">
+                </div>
+            </div>
+        </form>
+        <p class="entry-text-counter-text"><span class="entry-text-counter">500</span> karakteriniz kaldı.</p>
+    </div>
+    <!--  -->
+    {% else %}
+
+    <div class="message-edit">
+        <p class="title-message">{{ object.entry.entry_text }}</p>
+        {% if object.entry.author == user %}
+        <div class="edit-delete">
+                <i class="material-icons delete-entry" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">delete</i>
+                <i class="material-icons edit-entry" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">edit</i>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
     <div class="title-footer">
         <div class="like">
             <button class="likeBtn" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">▲</button>
@@ -44,5 +71,6 @@
 
 <script src="{% static 'js/handleLike.js' %}"></script>
 <script src="{% static 'js/handleEntryText.js' %}"></script>
+<script src="{% static 'js/handleEditDelete.js' %}"></script>
 
 

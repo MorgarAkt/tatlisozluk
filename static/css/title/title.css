@@ -136,7 +136,6 @@
     left: 0;
     right: 0;
     margin: auto;
-    overflow: hidden;
 }
 
 .create-title-name {
@@ -200,4 +199,13 @@ form .create {
 }
 .create input:hover {
     background-color: var(--brown);
+}
+.message-edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.edit-delete {
+    display: flex;
+    flex-direction: column;
 }

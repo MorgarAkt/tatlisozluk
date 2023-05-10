@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 
 def home(request):
-    titles = Title.objects.all()
+    titles = Title.objects.all().order_by('-created_date')
     titles_list = []
     for title in titles:
         entry = Entry.objects.filter(title=title).order_by('-likes')[0]
@@ -118,3 +118,43 @@ def createEntry(request, title_id):
     entry = Entry(title=title, entry_text=entry_text, author=request.user)
     entry.save()
     return redirect(f"/{title.slug}?titleId={title.id}")
+
+
+@login_required
+def deleteEntry(request, entry_id):
+    if request.method != "DELETE":
+        return redirect("home")
+    
+    entry = Entry.objects.get(id=entry_id)
+    if request.user != entry.author:
+        return redirect("home")
+
+    entry.delete()
+    return redirect(f"/{entry.title.slug}?titleId={entry.title.id}")
+
+
+@login_required
+def editEntry(request, entry_id):
+    if request.method != "PUT":
+        return redirect("home")
+    
+    entry = Entry.objects.get(id=entry_id)
+
+    if request.user != entry.author:
+        return redirect("home")
+
+    entry_text = request.PUT.get("entry_text")
+    entry.entry_text = entry_text
+    entry.save()
+    return redirect(f"/{entry.title.slug}?titleId={entry.title.id}")
+
+def changeEntry(request, title_id, entry_id):
+    title = Title.objects.get(id=title_id)
+
+    entries = Entry.objects.filter(title=title).order_by('created_date')
+    entries_profiles_list = []
+    for entry in entries:
+        user = entry.author
+        profile = Profile.objects.get(user=user)
+        entries_profiles_list.append({'entry':entry, 'profile':profile})
+    return render(request, "title/title.html", {'title':title, 'entries_profiles':entries_profiles_list, 'change_entry_id':entry_id})
