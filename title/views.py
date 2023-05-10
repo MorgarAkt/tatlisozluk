@@ -4,6 +4,7 @@ from account.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 def home(request):
@@ -16,28 +17,27 @@ def home(request):
             profile = Profile.objects.get(user=user)
         except:
             profile = None
-
-
+            
         titles_list.append({'title':title, 'entry':entry, 'profile':profile})
+
     return render(request, "title/index.html", {'titles_list':titles_list})
 
 
-def createNewTitle(request, slug=None):
-    if slug:
-        slug = slug.split('-')
-        slug = ' '.join(slug)
-    if slug == "createTitle":
-        slug = ""
-    return render(request, "title/createTitle.html", {'slug':slug})
+def createNewTitle(request):
+    return render(request, "title/createTitle.html")
 
 
 @login_required
 def saveTitle(request):
     if request.method != "POST":
         return redirect("home")
-    
+
     title_name = request.POST.get("title_name")
     entry_text = request.POST.get("entry_text")
+
+    if slugify(title_name) in Title.objects.all().values_list('slug', flat=True):
+        return render(request, "title/createTitle.html", {'error':'Böyle bir başlık bulunuyor.'})
+
     title = Title(title_name=title_name, author=request.user)
     title.save()
     entry = Entry(title=title, entry_text=entry_text, author=request.user)
@@ -47,8 +47,7 @@ def saveTitle(request):
 
 def title(request, slug):
     title_id = request.GET.get('titleId')
-    if title_id is None:
-        return createNewTitle(request, slug)
+
 
     title = Title.objects.get(id=title_id)
     print(title)

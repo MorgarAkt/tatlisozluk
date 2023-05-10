@@ -3,10 +3,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
 
 <div class="create-new-title">
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
     <form id="create-form" action="{% url 'saveTitle' %}" method="POST">
         {% csrf_token %}
         <div class="title-properties">
-            <input type="text" class="create-title-name" name="title_name" placeholder="Başlık Adı" value="{{ slug }}">
+            <input type="text" class="create-title-name" name="title_name" placeholder="Başlık Adı">
             <textarea class="create-entry-text" name="entry_text" placeholder="Entry yazısı"></textarea>
             <div class="create">
                 <input class="create-button" type="submit" value="Oluştur">
