@@ -8,9 +8,21 @@
             </a>
         </div>
         <div class="nav-box search-box">deneme1</div>
-        <div class="nav-box">Giriş Yap</div>
-        <div class="nav-box">Kayıt Ol</div>
-        <div class="nav-box" id="language">Dil</div>
+        {% if user.is_authenticated %}
+        <div class="nav-box">
+            <a href="{% url 'logout' %}" >Çıkış Yap</a>
+        </div>
+        {% else %}
+        <div class="nav-box">
+            <a href="{% url 'login' %}">Giriş Yap</a>
+        </div>
+        <div class="nav-box">
+            <a href="{% url 'register' %}">Kayıt Ol</a>
+        </div>
+        {% endif %}
+        <div class="nav-box" id="language">
+            <a>Dil</a>
+        </div>
     </nav>
     <nav class="nav-row">
         <div class="nav-box">deneme3</div>

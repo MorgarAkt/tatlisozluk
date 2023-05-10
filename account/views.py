@@ -7,10 +7,31 @@ from django.core.files.storage import default_storage
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
-def login(request):
+def logout_request(request):
+    logout(request)
+    return redirect("home")
+
+def login_request(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+        
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        print(request.POST)
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("home")
+        else:
+            return render(request, "account/login.html", {"error": "Kullanıcı Bulunamadı"})
+    
     return render(request, "account/login.html")
 
-def register(request):
+def register_request(request):
     if request.method == "POST":
         form_data = request.POST
         name = form_data.get('name')
