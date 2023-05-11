@@ -21,10 +21,10 @@
 }
 
 .title-detail-container{
-    top: 20px;
-    position: relative;
-    margin: 100px;
+    padding-top: 20px;
+
     left: 5vw;
+    position: relative;
     width: 90vw;
     display: flex;
     flex-direction: column;

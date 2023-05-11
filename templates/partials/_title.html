@@ -9,7 +9,6 @@
 
     <div class="title entry-{{ object.entry.id }}">
         {% if forloop.first %}
-<div class="title-detail-container">
         <p class="title-name">{{ title.title_name }}</p>
         {% endif %}
         {% if change_entry_id and object.entry.id == change_entry_id %}
@@ -57,10 +56,10 @@
             </div>
         </div>
     </div>
-
-
     {% endfor %}
-    {% if user.is_authenticated %}
+
+
+{% if user.is_authenticated %} 
     <div class="create-new-entry">
         <form id="create-form" action="{% url 'createEntry' title_id=title.id %}" method="POST">
             {% csrf_token %}
@@ -74,36 +73,6 @@
         <p class="entry-text-counter-text"><span class="entry-text-counter">8000</span> karakteriniz kaldı.</p>
     </div>
     {% endif %}
-    <div class="title-footer">
-        <div class="like">
-            <button class="likeBtn" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">▲</button>
-            <button class="dislikeBtn" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">▼</button>
-            <p class="count">{{ object.entry.likes }}</p>
-        </div>
-        <div class="author">
-            <div class="date-author">
-                <p class="author">{{ object.entry.author.username }}</p>
-                <p class="date">{{ object.entry.created_date }}</p>
-            </div>
-            <img class="profile-image" src="{{ MEDIA_URL }}{{ object.profile.image.url }}" alt="">
-        </div>
-    </div>
-    
-    
-    {% endfor %}
-</div>
-
-<div class="create-new-entry">
-    <form id="create-form" action="{% url 'createEntry' title_id=title.id %}" method="POST">
-        {% csrf_token %}
-        <div class="title-properties">
-            <textarea class="create-entry-text" name="entry_text" placeholder="Entry yazısı"></textarea>
-            <div class="create">
-                <input class="create-button" type="submit" value="Gönder">
-            </div>
-        </div>
-    </form>
-    <p class="entry-text-counter-text"><span class="entry-text-counter">8000</span> karakteriniz kaldı.</p>
 </div>
 
 <script src="{% static 'js/handleLike.js' %}"></script>
