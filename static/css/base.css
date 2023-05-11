@@ -8,7 +8,10 @@ body{
 }
 
 main {
-    position: absolute;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100vw;
     top: 140px;
 }
 
@@ -24,6 +27,7 @@ main {
     padding-top: 20px;
     border-bottom: 1px solid var(--brown);
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    z-index: 1000;
 }
 
 .nav-row{
@@ -49,7 +53,11 @@ main {
     transform-origin: 100% 50%;
 }
 
-
+#userImage{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
 
 @media (max-width: 630px) {
     .nav-box{

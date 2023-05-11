@@ -22,7 +22,7 @@ class Title(models.Model):
 
 class Entry(models.Model):
     title = models.ForeignKey(Title, on_delete=models.CASCADE)
-    entry_text = models.TextField(max_length=500)
+    entry_text = models.TextField(max_length=8000)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)

@@ -20,7 +20,7 @@ def home(request):
             
         titles_list.append({'title':title, 'entry':entry, 'profile':profile})
 
-    return render(request, "title/index.html", {'titles_list':titles_list})
+    return render(request, "title/index.html", {'titles_list':titles_list, 'all_titles':titles})
 
 
 def createNewTitle(request):

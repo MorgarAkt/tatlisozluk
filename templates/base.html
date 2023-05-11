@@ -16,13 +16,10 @@
     </head>
 
     <body>
-
-        {% include "partials/_navbar.html" %}
-
+        {% include "partials/_navbar.html" %}       
         <main>
         {% block content %} {% endblock content %}
         </main> 
-
         {% block js_files %}{% endblock js_files %}
     </body>
 </html>

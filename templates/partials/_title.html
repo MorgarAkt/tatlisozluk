@@ -6,6 +6,7 @@
 
 {% for object in entries_profiles %}
 
+<div class="title-detail-container">
 <div class="title">
     {% if forloop.first %}
         <p class="title-name">{{ title.title_name }}</p>
@@ -22,7 +23,7 @@
                 </div>
             </div>
         </form>
-        <p class="entry-text-counter-text"><span class="entry-text-counter">500</span> karakteriniz kaldı.</p>
+        <p class="entry-text-counter-text"><span class="entry-text-counter">8000</span> karakteriniz kaldı.</p>
     </div>
     <!--  -->
     {% else %}
@@ -53,6 +54,7 @@
     </div>
 </div>
 
+
 {% endfor %}
 
 <div class="create-new-entry">
@@ -65,9 +67,10 @@
             </div>
         </div>
     </form>
-    <p class="entry-text-counter-text"><span class="entry-text-counter">500</span> karakteriniz kaldı.</p>
+    <p class="entry-text-counter-text"><span class="entry-text-counter">8000</span> karakteriniz kaldı.</p>
 </div>
 
+</div>
 
 <script src="{% static 'js/handleLike.js' %}"></script>
 <script src="{% static 'js/handleEntryText.js' %}"></script>

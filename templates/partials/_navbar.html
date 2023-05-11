@@ -4,13 +4,28 @@
     <nav class="nav-row">
         <div class="nav-box">
             <a href="/">
-                <img id="logo-img" src="{% static 'images/logo.png' %}" alt="tatlisozluk logo">
+                <img
+                    id="logo-img"
+                    src="{% static 'images/logo.png' %}"
+                    alt="tatlisozluk logo"
+                />
             </a>
         </div>
         <div class="nav-box search-box">deneme1</div>
         {% if user.is_authenticated %}
         <div class="nav-box">
-            <a href="{% url 'logout' %}" >Çıkış Yap</a>
+            <img
+                id="userImage"
+                src="{{user.profile.image.url}}"
+                alt="profile pic"
+                srcset=""
+            />
+        </div>
+        <div class="nav-box">
+            {{user.username|title}}
+        </div>
+        <div class="nav-box">
+            <a href="{% url 'logout' %}">Çıkış Yap</a>
         </div>
         {% else %}
         <div class="nav-box">

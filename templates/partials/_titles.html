@@ -1,36 +1,56 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}"/>
+
+
 {% csrf_token %}
-
-{% if user.is_authenticated %}
-<div class="create-title">
-    <a class="no-underline" href="/title/new">Yeni bir entry oluştur!</a>
-</div>
-{% endif %}
-
-
-{% for object in titles_list %}
-
-<div class="title">
-    <a class="no-underline" href="{% url 'title' slug=object.title.slug %}?titleId={{ object.title.id }}">
-        <p class="title-name">{{ object.title.title_name }}</p>
-    </a>
-    <p class="title-message">{{ object.entry.entry_text }}</p>
-    <div class="title-footer">
-        <div class="like">
-            <button class="likeBtn" data-title-id="{{ object.title.id }}" data-entry-id="{{ object.entry.id }}">▲</button>
-            <button class="dislikeBtn" data-title-id="{{ object.title.id }}" data-entry-id="{{ object.entry.id }}">▼</button>
-            <p class="count">{{ object.entry.likes }}</p>
-        </div>
-        <div class="author">
-            <div class="date-author">
-                <p class="author">{{ object.entry.author.username }}</p>
-                <p class="date">{{ object.entry.created_date }}</p>
+<div class="titles-container">
+    {% if user.is_authenticated %}
+    <div class="create-title title">
+        <a class="no-underline" href="/title/new">Yeni bir entry oluştur!</a>
+    </div>
+    {% endif %}
+    {% for object in titles_list %}
+    <div class="title">
+        <a
+            class="no-underline"
+            href="{% url 'title' slug=object.title.slug %}?titleId={{ object.title.id }}"
+        >
+            <p class="title-name">{{ object.title.title_name }}</p>
+        </a>
+        <p class="title-message">{{ object.entry.entry_text }}</p>
+        <div class="title-footer">
+            <div class="like">
+                <button
+                    class="likeBtn"
+                    data-title-id="{{ object.title.id }}"
+                    data-entry-id="{{ object.entry.id }}"
+                >
+                    ▲
+                </button>
+                <button
+                    class="dislikeBtn"
+                    data-title-id="{{ object.title.id }}"
+                    data-entry-id="{{ object.entry.id }}"
+                >
+                    ▼
+                </button>
+                <p class="count">{{ object.entry.likes }}</p>
             </div>
-            <img class="profile-image" src="{{ MEDIA_URL }}{{ object.profile.image.url }}" alt="">
+            <div class="author">
+                <div class="date-author">
+                    <p class="author">{{ object.entry.author.username }}</p>
+                    <p class="date">{{ object.entry.created_date }}</p>
+                </div>
+                <img
+                    class="profile-image"
+                    src="{{ MEDIA_URL }}{{ object.profile.image.url }}"
+                    alt=""
+                />
+            </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 
-{% endfor %}
 <script src="{% static 'js/handleLike.js' %}"></script>
