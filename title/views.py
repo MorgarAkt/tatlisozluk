@@ -3,7 +3,6 @@ from .models import Title, Entry
 from account.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 
@@ -42,7 +41,7 @@ def saveTitle(request):
     title.save()
     entry = Entry(title=title, entry_text=entry_text, author=request.user)
     entry.save()
-    return redirect(f"/{title.slug}?titleId={title.id}")
+    return redirect(title.get_absolute_url())
 
 
 def title(request, slug):
@@ -53,7 +52,7 @@ def title(request, slug):
     print(title)
     if slug != title.slug:
         print("Slug is not equal to title slug")
-        return redirect(f"/{title.slug}?titleId={title_id}")
+        return redirect(title.get_absolute_url())
     
     entries = Entry.objects.filter(title=title).order_by('created_date')
     entries_profiles_list = []
@@ -84,7 +83,7 @@ def like(request, title_id, entry_id):
         entry.likes += 1
     
     entry.save()
-    return redirect(f"/{title.slug}?titleId={title.id}")
+    return redirect(title.get_absolute_url())
 
 
 @login_required
@@ -117,7 +116,7 @@ def createEntry(request, title_id):
     entry_text = request.POST.get("entry_text")
     entry = Entry(title=title, entry_text=entry_text, author=request.user)
     entry.save()
-    return redirect(f"/{title.slug}?titleId={title.id}")
+    return redirect(title.get_absolute_url())
 
 
 @login_required
@@ -134,7 +133,7 @@ def deleteEntry(request, entry_id):
         return redirect("/")
     else:
         entry.delete()
-    return redirect(f"/{entry.title.slug}?titleId={entry.title.id}")
+    return redirect(entry.get_absolute_title_url())
 
 
 @login_required
@@ -150,7 +149,7 @@ def editEntry(request, entry_id):
     entry_text = request.PUT.get("entry_text")
     entry.entry_text = entry_text
     entry.save()
-    return redirect(f"/{entry.title.slug}?titleId={entry.title.id}")
+    return redirect(entry.get_absolute_title_url())
 
 def changeEntry(request, title_id, entry_id):
     title = Title.objects.get(id=title_id)

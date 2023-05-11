@@ -16,6 +16,9 @@ class Title(models.Model):
             self.slug = slugify(self.title_name)
         super(Title, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return f"/{self.slug}?titleId={self.id}"
+
     def __str__(self):
         return self.title_name
     
@@ -32,6 +35,9 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.author.username + "- " + self.title.title_name
+    
+    def get_absolute_title_url(self):
+        return f"/{self.title.slug}?titleId={self.title.id}"
     
     def is_liked_by_user(self, user):
         return user in self.likers.all()
