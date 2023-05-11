@@ -4,9 +4,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% csrf_token %}
 
+<div class="title-detail-container">
 {% for object in entries_profiles %}
 
-<div class="title-detail-container">
 <div class="title">
     {% if forloop.first %}
         <p class="title-name">{{ title.title_name }}</p>
@@ -52,10 +52,10 @@
             <img class="profile-image" src="{{ MEDIA_URL }}{{ object.profile.image.url }}" alt="">
         </div>
     </div>
+    
+    
+    {% endfor %}
 </div>
-
-
-{% endfor %}
 
 <div class="create-new-entry">
     <form id="create-form" action="{% url 'createEntry' title_id=title.id %}" method="POST">
