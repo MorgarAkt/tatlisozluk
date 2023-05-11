@@ -143,22 +143,20 @@
 }   
 
 .create-new-title {
-    background-color: #C3B091;
+    position: relative;
+    background-color: var(--brown);
     color: #ffffff;
     padding: 10px;
     justify-content: space-between;
-    width: 60vw;
-    height: 75vh;
+    padding-top: 5%;
+    left: 10vw;
+    top: 7vh;
+    width: 80vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     overflow: auto;
     border-radius: 7px;
-    transform: translateY(30%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
 }
 
 .create-title-name {
@@ -221,7 +219,10 @@ form .create {
     background-color: hsl(26, 39%, 27%);
 }
 .create input:hover {
-    background-color: var(--brown);
+    background-color: white;
+    color: var(--brown);
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .message-edit {
     display: flex;
