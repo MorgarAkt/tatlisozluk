@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/title/title.css' %}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -42,9 +43,20 @@
         {% endif %}
         <div class="title-footer">
             <div class="like">
+                {% if user.is_authenticated and object.entry|is_liked_by_user:user %}
+                <button class="likeBtn liked" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">▲
+                </button>
+                <button class="dislikeBtn" data-title-id="{{ title.id }}"
+                data-entry-id="{{ object.entry.id }}">▼</button>
+                {% elif user.is_authenticated and object.entry|is_disliked_by_user:user %}
+                <button class="likeBtn" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">▲</button>
+                <button class="dislikeBtn disliked" data-title-id="{{ title.id }}"
+                    data-entry-id="{{ object.entry.id }}">▼</button>
+                {% else %}
                 <button class="likeBtn" data-title-id="{{ title.id }}" data-entry-id="{{ object.entry.id }}">▲</button>
                 <button class="dislikeBtn" data-title-id="{{ title.id }}"
                     data-entry-id="{{ object.entry.id }}">▼</button>
+                {% endif %}
                 <p class="count">{{ object.entry.likes }}</p>
             </div>
             <div class="author">

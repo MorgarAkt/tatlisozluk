@@ -234,3 +234,11 @@ form .create {
     flex-direction: column;
     cursor: pointer;
 }
+
+.liked {
+    color: greenyellow;
+}
+
+.disliked {
+    color: red;
+}

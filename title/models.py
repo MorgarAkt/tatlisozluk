@@ -33,3 +33,8 @@ class Entry(models.Model):
     def __str__(self):
         return self.author.username + "- " + self.title.title_name
     
+    def is_liked_by_user(self, user):
+        return user in self.likers.all()
+    
+    def is_disliked_by_user(self, user):
+        return user in self.dislikers.all()
