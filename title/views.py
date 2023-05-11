@@ -128,8 +128,12 @@ def deleteEntry(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
     if request.user != entry.author:
         return redirect("home")
-
-    entry.delete()
+    entries = Entry.objects.filter(title=entry.title)
+    if len(entries) == 1:
+        entry.title.delete()
+        return redirect("/")
+    else:
+        entry.delete()
     return redirect(f"/{entry.title.slug}?titleId={entry.title.id}")
 
 
