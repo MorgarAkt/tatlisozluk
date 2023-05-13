@@ -70,7 +70,7 @@ main {
     padding: 10px;
     border: none;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 16px;
     background-color: #e6e6e6;
     color: #333;
     padding-right: 40px;
@@ -125,5 +125,28 @@ main {
 @media (max-width: 630px) {
     .nav-box {
         font-size: 14px;
+    }
+    .search-input {
+        width: 150px;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: #e6e6e6;
+        color: #333;
+        padding-right: 40px;
+    }
+    .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 150px;
+        background-color: #fff;
+        border: 1px solid #c6c6c6;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        overflow-y: auto;
+        max-height: 150px;
+        z-index: 1;
     }
 }
