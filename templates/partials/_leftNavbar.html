@@ -2,7 +2,7 @@
     {% for title in all_titles %}
     <div>
         <a class="list-group-item list-group-item-action" href="{% url 'title' slug=title.slug %}?titleId={{ title.id }}">
-            {{title.title_name|title}}
+            #{{title.title_name|title}}
         </a>
     </div>
         {% endfor %}

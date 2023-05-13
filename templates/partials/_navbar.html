@@ -4,22 +4,13 @@
     <nav class="nav-row">
         <div class="nav-box">
             <a href="/">
-                <img
-                    id="logo-img"
-                    src="{% static 'images/logo.png' %}"
-                    alt="tatlisozluk logo"
-                />
+                <img id="logo-img" src="{% static 'images/logo.png' %}" alt="tatlisozluk logo" />
             </a>
         </div>
         <div class="nav-box search-box">deneme1</div>
         {% if user.is_authenticated %}
         <div class="nav-box">
-            <img
-                id="userImage"
-                src="{{user.profile.image.url}}"
-                alt="profile pic"
-                srcset=""
-            />
+            <img id="userImage" src="{{user.profile.image.url}}" alt="profile pic" srcset="" />
         </div>
         <div class="nav-box">
             {{user.username|title}}
@@ -42,6 +33,14 @@
     <nav class="nav-row">
         <div class="nav-box">deneme3</div>
         <div class="nav-box">deneme4</div>
-        <div class="nav-box">deneme5</div>
-    </nav>
+        <div class="nav-box">
+            <div class="search-container">
+                <input type="text" class="search search-input" placeholder="Bul..">
+                <button class="search-button"><i class="material-icons">search</i></button>
+                <div id="search-results" class="dropdown"></div>
+            </div>
+        </div>
+</nav>
 </div>
+
+<script src="{% static 'js/handleSearch.js' %}"></script>

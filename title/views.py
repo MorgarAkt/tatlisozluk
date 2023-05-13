@@ -1,9 +1,13 @@
-from django.shortcuts import render
 from .models import Title, Entry
 from account.models import Profile
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
+from django.http import JsonResponse
+from fuzzywuzzy import fuzz
+import locale
+
+locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
 
 
 def home(request):
@@ -46,10 +50,11 @@ def saveTitle(request):
 
 def title(request, slug):
     title_id = request.GET.get('titleId')
+    try:
+        title = Title.objects.get(id=title_id)
+    except Title.DoesNotExist:
+        title = get_object_or_404(Title, id=title_id)
 
-
-    title = Title.objects.get(id=title_id)
-    print(title)
     if slug != title.slug:
         print("Slug is not equal to title slug")
         return redirect(title.get_absolute_url())
@@ -151,6 +156,7 @@ def editEntry(request, entry_id):
     entry.save()
     return redirect(entry.get_absolute_title_url())
 
+
 def changeEntry(request, title_id, entry_id):
     title = Title.objects.get(id=title_id)
 
@@ -161,3 +167,18 @@ def changeEntry(request, title_id, entry_id):
         profile = Profile.objects.get(user=user)
         entries_profiles_list.append({'entry':entry, 'profile':profile})
     return render(request, "title/title.html", {'title':title, 'entries_profiles':entries_profiles_list, 'change_entry_id':entry_id})
+
+
+def search(request):
+    if 'query' in request.GET:
+        query = request.GET['query']
+        titles = Title.objects.all()
+        results = []
+        for title in titles:
+            similarity = fuzz.ratio(query.lower(), title.title_name.lower())
+            results.append({'name': title.title_name, 'similarity': similarity, 'id': title.id, 'slug': title.slug})
+        results.sort(key=lambda x: x['similarity'], reverse=True)
+        results = results[:5]
+        return JsonResponse({'results': results})
+    else:
+        return redirect("/")
