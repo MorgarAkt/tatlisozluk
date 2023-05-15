@@ -6,12 +6,21 @@ from django.utils.text import slugify
 from django.http import JsonResponse
 from fuzzywuzzy import fuzz
 import locale
+from datetime import datetime, timedelta
 
 locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
 
 
 def home(request):
+    sort = request.GET.get('sort')
     titles = Title.objects.all().order_by('-created_date')
+
+    if sort == "last_month_most_liked":
+        current_date = datetime.now().date()
+        thirty_days_ago = current_date - timedelta(days=30)
+        titles = Title.objects.filter(created_date__gte=thirty_days_ago).order_by('-most_like')
+    elif sort == "most_liked":
+        titles = Title.objects.all().order_by('-most_like')
     titles_list = []
     for title in titles:
         entry = Entry.objects.filter(title=title).order_by('-likes')[0]
@@ -88,6 +97,11 @@ def like(request, title_id, entry_id):
         entry.likes += 1
     
     entry.save()
+    entries = Entry.objects.filter(title=title)
+    most_like = entries.order_by('-likes')[0].likes
+    title.most_like = most_like
+    title.save()
+
     return redirect(title.get_absolute_url())
 
 
@@ -110,6 +124,11 @@ def dislike(request, title_id, entry_id):
         entry.likes -= 1
     
     entry.save()
+    entries = Entry.objects.filter(title=title)
+    most_like = entries.order_by('-likes')[0].likes
+    title.most_like = most_like
+    title.save()
+
     return title(request, title.slug, title_id)
 
 

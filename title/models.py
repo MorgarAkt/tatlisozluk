@@ -10,6 +10,7 @@ class Title(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    most_like = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         if not self.slug:
