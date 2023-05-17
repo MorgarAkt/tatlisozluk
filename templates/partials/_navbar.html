@@ -36,9 +36,9 @@
             <div class="nav-dropdown">
                 <button class="dropbtn">Sıralama</button>
                 <div class="nav-dropdown-content">
-                    <a href="{% url 'home' %}?sort=new">En Yeni</a>
-                    <a href="{% url 'home' %}?sort=most_liked">En Çok Beğeni</a>
-                    <a href="{% url 'home' %}?sort=last_month_most_liked">Son 1 Ay (En Çok Beğeni)</a>
+                    <a href="{% url 'home' %}?index={{ currentNumber }}&sort=new">En Yeni</a>
+                    <a href="{% url 'home' %}?index={{ currentNumber }}&sort=most_liked">En Çok Beğeni</a>
+                    <a href="{% url 'home' %}?index={{ currentNumber }}&sort=last_month_most_liked">Son 1 Ay (En Çok Beğeni)</a>
                 </div>
             </div>
         </div>

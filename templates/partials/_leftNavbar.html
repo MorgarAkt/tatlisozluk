@@ -1,9 +1,39 @@
+{% load custom_filters %}
 <div class="left-navbar">
     {% for title in all_titles %}
     <div>
-        <a class="list-group-item list-group-item-action" href="{% url 'title' slug=title.slug %}?titleId={{ title.id }}">
+        <a class="list-group-item list-group-item-action"
+            href="{% url 'title' slug=title.slug %}?titleId={{ title.id }}">
             #{{title.title_name|title}}
         </a>
     </div>
-        {% endfor %}
+    {% endfor %}
+    <div>
+        <ul>
+            {% if currentNumber|add:"-1" > 0 %}
+            {% for number in currentNumber|add:"-1"|custom_range:lastIndex %}
+                        {% if number == currentNumber and number != lastIndex %}
+            <li><a href="http://localhost:8000?index={{ number }}&sort={{ sort }}" class="active">{{ number }}</a></li>
+            {% else %}
+            {% if number > currentNumber|add:"-2" and number != lastIndex and forloop.counter < 4 %} <li><a
+                    href="http://localhost:8000?index={{ number }}&sort={{ sort }}">{{ number }}</a></li>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% else %}
+            {% for number in 1|custom_range:lastIndex %}
+                        {% if number == currentNumber and number != lastIndex %}
+            <li><a href="http://localhost:8000?index={{ number }}&sort={{ sort }}" class="active">{{ number }}</a></li>
+            {% else %}
+            {% if number > currentNumber|add:"-2" and number != lastIndex and forloop.counter < 3 %} <li><a
+                    href="http://localhost:8000?index={{ number }}&sort={{ sort }}">{{ number }}</a></li>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+
+
+                <li><a href="http://localhost:8000?index={{ lastIndex }}&sort={{ sort }}">{{ lastIndex }}</a></li>
+        </ul>
+    </div>
 </div>

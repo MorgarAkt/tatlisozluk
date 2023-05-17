@@ -15,7 +15,10 @@ locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
 def home(request):
     sort = request.GET.get('sort')
     titles = Title.objects.all().order_by('-created_date')
-
+    try:
+        index = int(request.GET.get('index'))
+    except:
+        index = 1
     if sort == "last_month_most_liked":
         current_date = datetime.now().date()
         thirty_days_ago = current_date - timedelta(days=30)
@@ -23,6 +26,7 @@ def home(request):
     elif sort == "most_liked":
         titles = Title.objects.all().order_by('-most_like')
     titles_list = []
+    lastIndex = (titles.count() // 10) + 1
     for title in titles:
         entry = Entry.objects.filter(title=title).order_by('-likes')[0]
         user = entry.author
@@ -33,7 +37,9 @@ def home(request):
             
         titles_list.append({'title':title, 'entry':entry, 'profile':profile})
 
-    return render(request, "title/index.html", {'titles_list':titles_list, 'all_titles':titles})
+    titles_list = titles_list[index*10 - 10:index*10]
+    titles = titles[index*10 - 10:index*10]
+    return render(request, "title/index.html", {'titles_list':titles_list, 'all_titles':titles, 'currentNumber': index, 'lastIndex': lastIndex, 'sort' : sort})
 
 
 def createNewTitle(request):
