@@ -31,6 +31,7 @@
         </div>
     </nav>
     <nav class="nav-row">
+        {% if request.path == "/" %}
         <div class="nav-box">
             <div class="nav-dropdown">
                 <button class="dropbtn">Sıralama</button>
@@ -41,6 +42,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         <div class="nav-box">
             <div class="search-container">
                 <input type="text" class="search search-input" placeholder="Bul..">
