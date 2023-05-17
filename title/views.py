@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
 from django.http import JsonResponse
-from fuzzywuzzy import fuzz
+from django.core import serializers
 import locale
 from datetime import datetime, timedelta
+import json
 
 locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
 
@@ -191,13 +192,9 @@ def changeEntry(request, title_id, entry_id):
 def search(request):
     if 'query' in request.GET:
         query = request.GET['query']
-        titles = Title.objects.all()
-        results = []
-        for title in titles:
-            similarity = fuzz.ratio(query.lower(), title.title_name.lower())
-            results.append({'name': title.title_name, 'similarity': similarity, 'id': title.id, 'slug': title.slug})
-        results.sort(key=lambda x: x['similarity'], reverse=True)
-        results = results[:5]
+        titles = Title.objects.filter(title_name__icontains=query)
+        results = json.loads(serializers.serialize('json', titles))
         return JsonResponse({'results': results})
+
     else:
         return redirect("/")

@@ -10,20 +10,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 var response = await fetch('/title/search?query=' + encodeURIComponent(query));
                 var data = await response.json();
                 var results = data.results;
-                console.log(results);
                 searchResults.innerHTML = '';
                 if (results.length > 0) {
-                    results.forEach(function (result) {
+                    for (let i = 0; i < results.length; i++) {
+                        console.log(results[i]);
                         const option = document.createElement('div');
                         option.classList.add('dropdown-item');
-                        option.setAttribute('href', "/" + result.slug + '?titleId=' + result.id);
+                        option.setAttribute('href', "/" + results[i].fields.slug + '?titleId=' + results[i].pk);
                         option.addEventListener('click', () => {
                             window.location = option.getAttribute('href');
                         });
 
-                        option.textContent = result.name;
+                        option.textContent = results[i].fields.title_name;
                         searchResults.appendChild(option);
-                    });
+                    };
                     searchResults.style.display = 'block';
                 } else {
                     searchResults.style.display = 'none';
