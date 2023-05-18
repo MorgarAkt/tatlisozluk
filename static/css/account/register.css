@@ -1,13 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-body {
+
+main {
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 10px;
     background: white;
@@ -15,13 +9,13 @@ body {
 .container {
     position: inherit;
     left: 25vw;
-    top: 16vh;
+    top: 13vh;
     width: 50vw;
     background-color: #fff;
     padding: 25px 30px;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     transform-origin: center;
 }
 .container .title {

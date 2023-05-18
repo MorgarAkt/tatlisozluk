@@ -11,6 +11,16 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
+.ln-innerbox {
+    height: calc((2100vh - 140px)/11);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: solid 1px var(--brown);
+}
+
+
 .titles-container{
     position: relative;
     padding-top: 20px;
@@ -236,9 +246,9 @@ form .create {
 }
 
 .liked {
-    color: greenyellow;
+    color: white;
 }
 
 .disliked {
-    color: red;
+    color: white;
 }

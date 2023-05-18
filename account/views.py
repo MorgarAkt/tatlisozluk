@@ -72,3 +72,8 @@ def register_request(request):
                 return redirect("home")
 
     return render(request, "account/register.html")
+
+
+
+def profile_page(request):
+    return render(request, "account/profile_page.html")

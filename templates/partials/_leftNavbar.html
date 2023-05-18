@@ -1,14 +1,25 @@
+{% load static %}
 {% load custom_filters %}
+
+
 <div class="left-navbar">
+    <div id="kategoriListesi">
+        <!-- Kategoriler burada listelenir -->
+      </div>
+     {% comment %}  
     {% for title in all_titles %}
-    <div>
-        <a class="list-group-item list-group-item-action"
-            href="{% url 'title' slug=title.slug %}?titleId={{ title.id }}">
-            #{{title.title_name|title}}
-        </a>
-    </div>
-    {% endfor %}
-    <div>
+    <a class="ln-innerbox" href="{% url 'title' slug=title.slug %}?titleId={{ title.id }}" >
+        <div >
+            {{title.title_name|title}}
+        </div>
+    </a>
+    {% endfor %} {% endcomment %}
+    <div id="sayfalama">
+        <a href="#" onclick="previousPage()">Önceki</a>
+        <span id="sayfaNumaralari"></span>
+        <a href="#" onclick="nextPage()">Sonraki</a>
+      </div>
+{% comment %}     <div>
         <ul>
             {% if currentNumber|add:"-1" > 0 %}
             {% for number in currentNumber|add:"-1"|custom_range:lastIndex %}
@@ -31,9 +42,9 @@
                 {% endif %}
             {% endfor %}
             {% endif %}
-
-
                 <li><a href="http://localhost:8000?index={{ lastIndex }}&sort={{ sort }}">{{ lastIndex }}</a></li>
         </ul>
-    </div>
+    </div> {% endcomment %}
+
+    <script src="{% static 'js/leftNavbar.js' %}"></script>
 </div>

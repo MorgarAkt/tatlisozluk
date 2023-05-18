@@ -1,52 +1,76 @@
 {% load static %}
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+/>
 <div class="header">
     <nav class="nav-row">
         <div class="nav-box">
             <a href="/">
-                <img id="logo-img" src="{% static 'images/logo.png' %}" alt="tatlisozluk logo" />
+                <img
+                    id="logo-img"
+                    src="{% static 'images/logo.png' %}"
+                    alt="tatlisozluk logo"
+                />
             </a>
         </div>
-        <div class="nav-box search-box">deneme1</div>
-        {% if user.is_authenticated %}
-        <div class="nav-box">
-            <img id="userImage" src="{{user.profile.image.url}}" alt="profile pic" srcset="" />
-        </div>
-        <div class="nav-box">
-            {{user.username|title}}
-        </div>
-        <div class="nav-box">
-            <a href="{% url 'logout' %}">Çıkış Yap</a>
-        </div>
-        {% else %}
-        <div class="nav-box">
-            <a href="{% url 'login' %}">Giriş Yap</a>
-        </div>
-        <div class="nav-box">
-            <a href="{% url 'register' %}">Kayıt Ol</a>
-        </div>
-        {% endif %}
-        <div class="nav-box" id="language">
-            <a>Dil</a>
+        <div class="nav-user-details">
+            {% if user.is_authenticated %}
+            <div class="nav-box">
+                <img
+                    id="userImage"
+                    src="{{user.profile.image.url}}"
+                    alt="profile pic"
+                    srcset=""
+                />
+            </div>
+            <div class="nav-box">
+                <a href="{% url 'profile_page' %}">{{user.username|title}}</a>
+            </div>
+            <div class="nav-box">
+                <a href="{% url 'logout' %}">Çıkış Yap</a>
+            </div>
+            {% else %}
+            <div class="nav-box">
+                <a href="{% url 'login' %}">Giriş Yap</a>
+            </div>
+            <div class="nav-box">
+                <a href="{% url 'register' %}">Kayıt Ol</a>
+            </div>
+            {% endif %}
         </div>
     </nav>
-    <nav class="nav-row">
-        {% if request.path == "/" %}
+    <nav class="nav-row bottom">
         <div class="nav-box">
             <div class="nav-dropdown">
                 <button class="dropbtn">Sıralama</button>
                 <div class="nav-dropdown-content">
-                    <a href="{% url 'home' %}?index={{ currentNumber }}&sort=new">En Yeni</a>
-                    <a href="{% url 'home' %}?index={{ currentNumber }}&sort=most_liked">En Çok Beğeni</a>
-                    <a href="{% url 'home' %}?index={{ currentNumber }}&sort=last_month_most_liked">Son 1 Ay (En Çok Beğeni)</a>
+                    <a
+                        href="{% url 'home' %}?index={{ currentNumber }}&sort=new"
+                        >En Yeni</a
+                    >
+                    <a
+                        href="{% url 'home' %}?index={{ currentNumber }}&sort=most_liked"
+                        >En Çok Beğeni</a
+                    >
+                    <a
+                        href="{% url 'home' %}?index={{ currentNumber }}&sort=last_month_most_liked"
+                        >Son 1 Ay (En Çok Beğeni)</a
+                    >
                 </div>
             </div>
         </div>
-        {% endif %}
+
         <div class="nav-box">
             <div class="search-container">
-                <input type="text" class="search search-input" placeholder="Bul..">
-                <button class="search-button"><i class="material-icons">search</i></button>
+                <input
+                    type="text"
+                    class="search search-input"
+                    placeholder="Bul.."
+                />
+                <button class="search-button">
+                    <i class="material-icons">search</i>
+                </button>
                 <div id="search-results" class="dropdown"></div>
             </div>
         </div>
