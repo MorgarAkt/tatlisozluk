@@ -7,13 +7,12 @@
 
 * {
     font-family: "Alegreya", serif;
-    
 }
 
-a{
+a {
     color: black;
     text-decoration: none;
-} 
+}
 
 body {
     margin: 0;
@@ -188,6 +187,12 @@ main {
     display: block;
 }
 
+
+.ln-menu {
+    display: none;
+}
+
+
 @media (max-width: 630px) {
     .nav-box {
         font-size: 14px;
@@ -216,4 +221,5 @@ main {
         max-height: 150px;
         z-index: 1;
     }
+
 }

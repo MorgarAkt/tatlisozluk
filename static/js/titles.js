@@ -64,7 +64,7 @@ function slideUp(element) {
 }
 
 function checkScreenWidth() {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 630) {
         myDiv.style.display = "block";
     } else {
         myDiv.style.display = "none";

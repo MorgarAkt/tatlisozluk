@@ -44,6 +44,7 @@
         <div class="nav-box ln-menu" id="ln-button">
                 <i class="material-icons">menu</i>
         </div>
+        {% if request.path == "/" %}
         <div class="nav-box">
             <div class="nav-dropdown">
                 <button class="dropbtn">Sıralama</button>
@@ -63,6 +64,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
 
         <div class="nav-box">
             <div class="search-container">
