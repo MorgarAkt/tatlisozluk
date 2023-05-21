@@ -3,48 +3,37 @@
 
 
 <div class="left-navbar" id="lnbar">
-    <div id="kategoriListesi">
-        <!-- Kategoriler burada listelenir -->
-      </div>
-     {% comment %}  
     {% for title in all_titles %}
+    <div>
     <a class="ln-innerbox" href="{% url 'title' slug=title.slug %}?titleId={{ title.id }}" >
-        <div >
-            {{title.title_name|title}}
-        </div>
+        {{title.title_name|title}}
     </a>
-    {% endfor %} {% endcomment %}
-    <div id="sayfalama">
-        <a href="#" onclick="previousPage()">Önceki</a>
-        <span id="sayfaNumaralari"></span>
-        <a href="#" onclick="nextPage()">Sonraki</a>
-      </div>
-{% comment %}     <div>
-        <ul>
+    </div>
+    {% endfor %}
+    <div class="ln-pager">
+        
             {% if currentNumber|add:"-1" > 0 %}
             {% for number in currentNumber|add:"-1"|custom_range:lastIndex %}
                         {% if number == currentNumber and number != lastIndex %}
-            <li><a href="http://localhost:8000?index={{ number }}&sort={{ sort }}" class="active">{{ number }}</a></li>
+            <a href="http://localhost:8000?index={{ number }}&sort={{ sort }}" class="active">{{ number }}</a>
             {% else %}
-            {% if number > currentNumber|add:"-2" and number != lastIndex and forloop.counter < 4 %} <li><a
-                    href="http://localhost:8000?index={{ number }}&sort={{ sort }}">{{ number }}</a></li>
+            {% if number > currentNumber|add:"-2" and number != lastIndex and forloop.counter < 4 %} <a
+                    href="http://localhost:8000?index={{ number }}&sort={{ sort }}">{{ number }}</a>
                 {% endif %}
                 {% endif %}
             {% endfor %}
             {% else %}
             {% for number in 1|custom_range:lastIndex %}
                         {% if number == currentNumber and number != lastIndex %}
-            <li><a href="http://localhost:8000?index={{ number }}&sort={{ sort }}" class="active">{{ number }}</a></li>
+            <a href="http://localhost:8000?index={{ number }}&sort={{ sort }}" class="active">{{ number }}</a>
             {% else %}
-            {% if number > currentNumber|add:"-2" and number != lastIndex and forloop.counter < 3 %} <li><a
-                    href="http://localhost:8000?index={{ number }}&sort={{ sort }}">{{ number }}</a></li>
+            {% if number > currentNumber|add:"-2" and number != lastIndex and forloop.counter < 3 %} <a
+                    href="http://localhost:8000?index={{ number }}&sort={{ sort }}">{{ number }}</a>
                 {% endif %}
                 {% endif %}
             {% endfor %}
             {% endif %}
-                <li><a href="http://localhost:8000?index={{ lastIndex }}&sort={{ sort }}">{{ lastIndex }}</a></li>
-        </ul>
-    </div> {% endcomment %}
-
-    <script src="{% static 'js/leftNavbar.js' %}"></script>
+                <a href="http://localhost:8000?index={{ lastIndex }}&sort={{ sort }}">{{ lastIndex }}</a>
+    </div>
 </div>
+<script src="{% static 'js/titles.js' %}"></script>
