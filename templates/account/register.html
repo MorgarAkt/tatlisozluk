@@ -32,19 +32,19 @@
             <div class="user-details">
                 <div class="input-box">
                     <span class="details">First Name</span>
-                    <input name="name" type="text" placeholder="Enter your name" required>
+                    <input value={{name}} name="name" type="text" placeholder="Enter your name" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Surname</span>
-                    <input name="surname" type="text" placeholder="Enter your surname" required>
+                    <input value={{surname}} name="surname" type="text" placeholder="Enter your surname" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Username</span>
-                    <input name="username" type="text" placeholder="Enter your username" required>
+                    <input value={{username}} name="username" type="text" placeholder="Enter your username" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input name="email" type="text" placeholder="Enter your email" required>
+                    <input value={{email}} name="email" type="text" placeholder="Enter your email" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Password</span>
@@ -80,9 +80,11 @@
     </div>
 </div>
 
+{% if error != none %}
 <div class="alert alert-error" onclick="hideAlert()">
-    <p>error message</p><a href="#">
+    <p>{{error}}</p><a href="#">
 </div>
+{% endif %}
 
 
 <script>

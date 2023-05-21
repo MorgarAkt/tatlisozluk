@@ -47,9 +47,10 @@ def register_request(request):
         if password == passwordConfirmation:
             if User.objects.filter(username=username).exists():
                 return render(request, "account/register.html", {
-                    "error": "Kullanıcı adı kullanılıyor",
+                    "error": "Kullanıcı Adı Kullanılıyor",
                     "name": name,
                     "surname": surname,
+                    "username": username,
                     "email": email,
                     "password":password,
                     "repassword":password,    
@@ -60,16 +61,24 @@ def register_request(request):
                     "name": name,
                     "surname": surname,
                     "username": username,
+                    "email": email,
                     "password":password,
                     "repassword":password   
                     })
             else:
-                user = User.objects.create_user(first_name = name, last_name = surname, username=username,
-                                    email=email, password=password)
+                user = User.objects.create_user(first_name = name, last_name = surname, username=username, email=email, password=password)
                 user.save()
                 profile = Profile(user = user, image = "/profile_pics/"+image.name)
                 profile.save()
                 return redirect("home")
+        else:
+            return render(request, "account/register.html", {
+                    "error": "Şifreler Eşleşmiyor",
+                    "name": name,
+                    "surname": surname,
+                    "username": username,
+                    "email": email,
+                })
 
     return render(request, "account/register.html")
 

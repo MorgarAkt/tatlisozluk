@@ -36,4 +36,10 @@
     </div>
 </div>
 
+{% if error != none %}
+<div class="alert alert-error" onclick="hideAlert()">
+    <p>{{error}}</p><a href="#">
+</div>
+{% endif %}
+
 {% endblock content%}

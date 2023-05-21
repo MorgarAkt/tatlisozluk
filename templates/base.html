@@ -20,8 +20,12 @@
         {% include "partials/_navbar.html" %}       
         <main>
         {% block content %} {% endblock content %}
+        
+        <div class="alert alert-error" onclick="hideAlert()" style="display: none;">
+        </div>
         </main> 
         <script src="{% static 'js/base.js' %}"></script>
         {% block js_files %}{% endblock js_files %}
     </body>
+
 </html>
