@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{user.username}}
+{% endblock title%}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/account/profile-page.css' %}">
+{% endblock css_files %}
+
+{% block links %}
+{% endblock links %}
+
+{% block content %}
+<div class="profile-block">
+    <img src="{{ user.profile.image.url }}" class="user-images" alt="Profile Image">
+    <div class="username text">
+        {{user.username|title}}
+    </div>
+    <div class="user-infos text">
+        {{user.first_name|title}} <br>
+        {{user.last_name|title}}
+    </div>
+    <div class="profile-infos text">
+        {{user.date_joined}} tarihinden beri aramızda. 
+        <br>
+        🥳🥳🥳
+    </div>
+    <div class="title-infos text">
+        Beğenenlerinin <br> 
+        Sayısı <br>
+        {{total_likes}} 💅
+        <br>
+    </div>
+</div>
+{% endblock content%}

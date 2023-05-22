@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Alegreya&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poltawski+Nowy&display=swap');
 
 :root {
     --brown: #ac703f;
@@ -12,7 +12,7 @@
 }
 
 * {
-    font-family: "Alegreya", serif;
+    font-family: 'Poltawski Nowy', serif;
 }
 
 a {

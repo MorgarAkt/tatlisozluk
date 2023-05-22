@@ -25,7 +25,7 @@
                 />
             </div>
             <div class="nav-box">
-                <a href="{% url 'profile_page' %}">{{user.username|title}}</a>
+                <a href="{% url 'user_details' username=user.username %}">{{user.username|title}}</a>
             </div>
             <div class="nav-box">
                 <a href="{% url 'logout' %}">Çıkış Yap</a>
