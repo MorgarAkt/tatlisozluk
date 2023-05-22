@@ -1,10 +1,10 @@
 .profile-block {
     display: grid;
-    width: 70vw;
     grid-template-columns: repeat(13, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    width: 70vw;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -25,13 +25,14 @@
     border-radius: 14px 0 0 14px;
 }
 
-.text{
+.text {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 24px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 0px 3px 0px;}
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 0px 3px 0px;
+}
 
 .username {
     grid-area: 1 / 5 / 2 / 14;
@@ -47,4 +48,54 @@
 }
 .title-infos {
     grid-area: 2 / 11 / 5 / 14;
+}
+
+@media (max-width: 630px) {
+    .profile-block {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        width: 70vw;
+        position: absolute;
+        top: 350px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .username {
+        grid-area: 1 / 1 / 2 / 5;
+    }
+    .user-images {
+        grid-area: 2 / 1 / 6 / 5;
+        box-shadow:rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        border-radius: 0;
+    }
+    .profile-infos {
+        grid-area: 6 / 1 / 9 / 2;
+    }
+    .title-infos {
+        grid-area: 6 / 2 / 9 / 3;
+    }
+    .user-infos {
+        grid-area: 9 / 1 / 11 / 3;
+    }
+
+    .text {
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 0px 3px 0px;
+        border-radius: 14px 14px 0px 0;
+    }
+    
+    .username {
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
 }

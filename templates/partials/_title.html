@@ -63,7 +63,9 @@
                     <p class="author">{{ object.entry.author.username }}</p>
                     <p class="date">{{ object.entry.created_date }}</p>
                 </div>
+                <a href="{% url 'user_details' username=object.profile.user.username %}">
                 <img class="profile-image" src="{{ MEDIA_URL }}{{ object.profile.image.url }}" alt="">
+                </a>
             </div>
         </div>
     </div>

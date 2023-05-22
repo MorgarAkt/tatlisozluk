@@ -17,12 +17,14 @@
         <div class="nav-user-details">
             {% if user.is_authenticated %}
             <div class="nav-box">
+                <a href="{% url 'user_details' username=user.username %}">
                 <img
                     id="userImage"
                     src="{{user.profile.image.url}}"
                     alt="profile pic"
                     srcset=""
                 />
+                </a>
             </div>
             <div class="nav-box">
                 <a href="{% url 'user_details' username=user.username %}">{{user.username|title}}</a>
