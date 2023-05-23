@@ -50,6 +50,24 @@
     grid-area: 2 / 11 / 5 / 14;
 }
 
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+.edit{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 40px;
+}
+
+.edit:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 630px) {
     .profile-block {
         display: grid;
@@ -63,6 +81,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
+    .edit{
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 24px;
+    }
+    
 
     .username {
         grid-area: 1 / 1 / 2 / 5;

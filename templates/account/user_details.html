@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-{{user.username}}
+{{selected_user.username}}
 {% endblock title%}
 
 {% block css_files %}
@@ -11,21 +11,22 @@
 {% endblock css_files %}
 
 {% block links %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 {% endblock links %}
 
 {% block content %}
 
 <div class="profile-block">
-    <img src="{{ user.profile.image.url }}" class="user-images" alt="Profile Image">
+    <img src="{{ selected_user.profile.image.url }}" class="user-images" alt="Profile Image">
     <div class="username text">
-        {{user.username|title}}
+        {{selected_user.username|title}}
     </div>
     <div class="user-infos text">
-        {{user.first_name|title}} <br>
-        {{user.last_name|title}}
+        {{selected_user.first_name|title}} <br>
+        {{selected_user.last_name|title}}
     </div>
     <div class="profile-infos text">
-        {{user.date_joined}} tarihinden beri aramızda. 
+        {{selected_user.date_joined}} tarihinden beri aramızda. 
         <br>
         🥳🥳🥳
     </div>
@@ -35,5 +36,15 @@
         {{total_likes}} 💅
         <br>
     </div>
+    {% if user.is_authenticated %}
+        {% if user.username == selected_user.username%}
+            <a href="{% url 'edit_user' user.username%}">
+                <span class="material-symbols-outlined edit">
+                    edit
+                </span>
+            </a>
+        {% endif %}
+    {% endif %}
+
 </div>
 {% endblock content%}

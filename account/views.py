@@ -101,7 +101,7 @@ def user_details(request, username):
 
         # Create a context dictionary with the user's information
         context = {
-            'user': user,
+            'selected_user': user,
             'total_likes': total_likes,
         }
 
