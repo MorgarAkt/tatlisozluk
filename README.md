@@ -48,7 +48,7 @@ python manage.py runserver
 7. Uygulamaya http://localhost:8000/ adresinden erişebilirsiniz.
 
 ## Amaç
-Bu Django projesi Ekşisözlük sitesinden ilhan almış bir final proje ödevidir.
+Bu Django projesi Ekşisözlük sitesinden ilham almış bir final proje ödevidir.
 
 
 ## Katkıda Bulunma
