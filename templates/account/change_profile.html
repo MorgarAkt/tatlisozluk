@@ -2,13 +2,16 @@
 
 {% load static %}
 
-{% block title %}Register{% endblock title%}
+{% block title %}
+{{user.username}}
+{% endblock title%}
 
 {% block css_files %}
-<link rel="stylesheet" href="{% static 'css/account/register.css' %}" />
-{% endblock css_files %}
-
-{% block links %}
+<link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+/>
+<link rel="stylesheet" href="{% static 'css/account/register.css' %}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"
     integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -21,38 +24,26 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
     integrity="sha512-cyzxRvewl+FOKTtpBzYjW6x6IAYUCZy3sGP40hn+DQkqeluGRCax7qztK2ImL64SA+C7kVWdLI6wvdlStawhyw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock css_files %}
+
+{% block links %}
 {% endblock links %}
 
 {% block content %}
+{% if user.is_authenticated and request.user == user_details %}
 <div class="container">
-    <div class="title">Kayıt Ol</div>
+    <div class="title">Bilgilerini Değiştir</div>
     <div class="content">
-        <form enctype="multipart/form-data" action="{% url 'register' %}" method="post">
+        <form enctype="multipart/form-data" action="{% url 'change_user' username=request.user %}" method="POST">
             {% csrf_token %}
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">İsim</span>
-                    <input value="{{name}}" name="name" type="text" placeholder="İsmini gir" required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Soyisim</span>
-                    <input value="{{surname}}" name="surname" type="text" placeholder="Soyismini gir" required>
-                </div>
-                <div class="input-box">
                     <span class="details">Kullanıcı Adı</span>
-                    <input value="{{username}}" name="username" type="text" placeholder="Kullanıcı adını gir" required>
+                    <input value="{{user_details.username}}" name="username" type="text">
                 </div>
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input value="{{email}}" name="email" type="text" placeholder="Emailini gir" required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Şifre</span>
-                    <input name="password" type="password" placeholder="Şifreni gir" required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Şifreyi doğrula</span>
-                    <input name="repassword" type="password" placeholder="Şifreni doğrula" required>
+                    <input value="{{user_details.email}}" name="email" type="text">
                 </div>
             </div>
 
@@ -68,7 +59,7 @@
                         <input type="button" value="Crop">
                     </div>
                 <div class="button js-export img-export" id="confirm-btn">
-                    <input type="submit" value="Register">
+                    <input type="submit" value="Güncelle">
                 </div>
             </div>
             </form>
@@ -79,14 +70,7 @@
         </form>
     </div>
 </div>
-
-{% if error != none %}
-<div class="alert alert-error" onclick="hideAlert()">
-    <p>{{error}}</p><a href="#">
-</div>
 {% endif %}
-
-
 <script>
     const imagebox = document.getElementById('image-box')
     const crop_btn = document.getElementById('crop-btn')
@@ -131,5 +115,4 @@
         });
     });
 </script>
-
 {% endblock content%}

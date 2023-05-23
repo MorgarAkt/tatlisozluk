@@ -1,5 +1,4 @@
 const deleteEntry = document.getElementsByClassName('delete-entry');
-const editEntry = document.getElementsByClassName('edit-entry');
 
 for (let i = 0; i < deleteEntry.length; i++) {
     deleteEntry[i].addEventListener('click', async () => {
@@ -13,7 +12,7 @@ for (let i = 0; i < deleteEntry.length; i++) {
                 'X-CSRFToken': csrfToken
             },
         });
-        // window.location.href = `/slug?titleId=${titleId}`;
+
         if (response.status === 204 || response.status === 200 || response.status === 201 || response.status === 202) {
             document.getElementsByClassName(`entry-${entryId}`)[0].remove();
         }
@@ -31,10 +30,3 @@ for (let i = 0; i < deleteEntry.length; i++) {
     });
 }
 
-for (let i = 0; i < editEntry.length; i++) {
-    editEntry[i].addEventListener('click', async () => {
-        const entryId = dislikeBtns[i].getAttribute('data-entry-id');
-        const titleId = dislikeBtns[i].getAttribute('data-title-id');
-        window.location.href = `/title/${titleId}/entry/${entryId}/edit`;
-    });
-}

@@ -102,7 +102,7 @@ def user_details(request, username):
         # Create a context dictionary with the user's information
         context = {
             'user': user,
-            'total_likes': total_likes
+            'total_likes': total_likes,
         }
 
         # Render the page template and pass the context dictionary
@@ -112,3 +112,31 @@ def user_details(request, username):
         # Handle the case when the user does not exist
         # You can redirect to an error page or return an appropriate response
         return render(request, 'user_not_found.html')
+
+def change_user(request, username):
+    if request.method == "POST":
+        user = User.objects.get(username=username)
+        form_data = request.POST
+        new_username = form_data.get("username")
+        new_email = form_data.get("email")
+        user.username = new_username
+        user.email = new_email
+        user.save()
+
+        if 'image' in request.FILES:
+            new_image = request.FILES.get('image')
+            fs = FileSystemStorage(location='uploads/profile_pics')
+            fs.save(new_image.name, new_image)
+            profile = Profile.objects.get(user=user)
+            profile.image = "/profile_pics/"+new_image.name
+            profile.save()
+        return redirect(f"/account/user/{new_username}/")
+    else:
+        return redirect("home")
+
+def edit_user(request, username):
+    user = User.objects.get(username=username)
+    if request.user != user:
+        return redirect("home")
+    user = User.objects.get(username=username)
+    return render(request, "account/change_profile.html", {"user_details": user})
