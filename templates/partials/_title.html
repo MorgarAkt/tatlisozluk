@@ -17,9 +17,9 @@
             <form id="edit-form" action="{% url 'editEntry' entry_id=object.entry.id %}" method="POST">
                 {% csrf_token %}
                 <div class="title-properties">
-                    <textarea class="edit-entry" name="edit-entry-text" placeholder="Entry yazısı"></textarea>
+                    <textarea class="edit-entry-text" name="edit-entry-text" placeholder="Entry yazısı"></textarea>
                     <div class="create">
-                        <input class="create-button" type="submit" value="Gönder">
+                        <input class="create-button edit-button" type="submit" value="Gönder">
                     </div>
                 </div>
             </form>
@@ -34,8 +34,6 @@
             <div class="edit-delete">
                 <i class="material-icons delete-entry" data-title-id="{{ title.id }}"
                     data-entry-id="{{ object.entry.id }}">delete</i>
-                <i class="material-icons edit-entry" data-title-id="{{ title.id }}"
-                    data-entry-id="{{ object.entry.id }}">edit</i>
             </div>
             {% endif %}
         </div>

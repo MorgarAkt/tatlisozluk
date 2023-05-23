@@ -13,18 +13,18 @@
 
 {% block content %}
 <div class="container">
-    <div class="title">Login</div>
+    <div class="title">Giriş</div>
     <div class="content">
         <form enctype="multipart/form-data" action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Username</span>
-                    <input name="username" type="text" placeholder="Enter your username" required>
+                    <span class="details">Kullanıcı Adı</span>
+                    <input name="username" type="text" placeholder="Kullanıcı adını gir" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Password</span>
-                    <input name="password" type="password" placeholder="Enter your password" required>
+                    <span class="details">Şifre</span>
+                    <input name="password" type="password" placeholder="Şifreni gir" required>
                 </div>
             </div>
 
